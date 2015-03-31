@@ -1,0 +1,48 @@
+
+
+<%= render "layouts/signout" %>
+
+<div class='row'>
+	<h2>Add a new user</h2>
+	<button><a href='/users/dashboard'>Return to Dashboard</a></button>
+</div>
+
+<div class='row'>
+	<div class='col-md-6'>
+		<% if flash[:errors] %>
+			<% flash[:errors].each do |error| %>
+				<p><%= error %></p>
+			<% end %>
+		<% end %>
+		<% if flash[:notice] %>
+			<%= flash[:notice] %>
+		<% end %>
+
+		<form action='/users/' method='post'>
+			<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+			<div class='form-group'>
+				<label for='first_name'>First Name</label>	
+				<input type='text' class="form-control" name='first_name'>
+			</div>
+			<div class='form-group'>
+				<label for='last_name'>Last Name</label>	
+				<input type='text' class="form-control" name='last_name'>
+			</div>
+			<div class='form-group'>
+				<label for='email'>Email</label>	
+				<input type='email' class="form-control" name='email'>
+			</div>	
+			<div class='form-group'>
+				<label for='password'>Password - Must be at least 8 Characters</label>	
+				<input type='text' class="form-control" name='password'>
+			</div>
+			<div class='form-group'>
+				<label for='password_confirmation'>Confirm Password</label>	
+				<input type='text' class="form-control" name='password_confirmation'>
+			</div>
+			<div class='text-right'>
+				<input type='submit' value='Register' />
+			</div>
+		</form>
+	</div>
+</div>

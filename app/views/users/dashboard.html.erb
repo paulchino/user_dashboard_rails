@@ -1,0 +1,60 @@
+<%= render "layouts/signout" %>
+
+<h1>Dashboards</h1>
+<h3>Hello <%= current_user.first_name %> </h3>
+
+<% if current_user.user_level == 9 %>
+	<div class='row'>
+		<div class='text-left'>
+			<h3 class='inline'>Manage Users</h3>
+		</div>
+		<div class='text-right'>
+			<button type='button'><a href="/users/new">Add New</a></button>
+		</div>
+	</div>
+<% else %>
+<div class='row'>
+	<div class='text-left'>
+		<h3 class='inline'>All Users</h3>
+	</div>
+</div>
+<% end %>
+
+<table class='table-striped table table-bordered'>
+	<tr>
+		<td>ID</td>
+		<td>Name</td>
+		<td>email</td>
+		<td>created_at</td>
+		<td>user_level</td>
+		<% if current_user.user_level == 9 %>
+
+			<td>actions</td>
+		<% end %>
+	</tr>
+	<% @users.each do |user| %>
+	<tr>
+		<td> <%= user.id %></td>
+		<td> <a href="/wall/<%= user.id %>"> <%= user.first_name %> <%= user.last_name %> </a> </td>
+		<td> <%= user.email %> </td>
+		<td> <%= user.created_at %> </td>
+		<td> <% if user.user_level == 9 %> 
+				admin
+			 <% else %>
+			 	normal
+			 <% end %>
+		</td>
+		<% if current_user.user_level == 9 %>
+			<td><a href="/users/<%=user.id%>/edit">edit</a> | <a href="/users/<%=user.id %>/" data-method='delete'>remove</a> </td>
+		<% end %>
+	</tr>
+	<% end %>
+<!-- 	<tr>
+		<td>2</td>
+		<td>Bob Smit</td>
+		<td>b@gmail.com</td>
+		<td>Dec. 23, 2012</td>
+		<td>normal</td>
+		<td><a href="">edit</a> | <a href="">remove</a> </td>
+	</tr> -->
+</table>
