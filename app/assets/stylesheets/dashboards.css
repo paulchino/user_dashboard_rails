@@ -1,0 +1,14 @@
+
+
+.inline {
+	display: inline-block;
+}
+
+.addnew-btn {
+	margin-top: 10px
+}
+
+.description-textbox {
+	width: 100%;
+	height: 200px;
+}

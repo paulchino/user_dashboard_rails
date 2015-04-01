@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     #this references the funciton we made in user.rb
   	user = User.authenticate(params[:email], params[:password])
   	if user.nil?
-  		 flash[:error] = "couldn't find a user with those credentials"
+  		 flash[:error] = "Email or password incorrect. Please try again."
        #if there is an error, redirect back to login
        redirect_to "/sessions/index/"
   	else

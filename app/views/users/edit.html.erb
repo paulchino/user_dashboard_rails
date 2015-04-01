@@ -1,16 +1,20 @@
-<h1>Edit Page</h1>
+<% content_for :stylesheet do %>
+	<%= stylesheet_link_tag 'dashboards.css' %>
+<% end %> 
+
 
 <%= render "layouts/signout" %>
 
 <div class='row'>
-	<h3>Edit user #<%= @user.id %></h3>
-	<button><a href='/users/dashboard'>Return to Dashboard</a></button>
-
+	<div class='col-md-12'>
+		<h3 class='inline'>Edit user #<%= @user.id %> - <%= @user.first_name %> </h3>
+		<button type='button' class='btn btn-default pull-right addnew-btn'><a href='/users/dashboard'>Return to Dashboard</a></button>
+	</div>
 </div>
 
 <div class='row'>
 	<div class='col-md-6'>
-		<h2>Edit Information</h2>
+		<h3>Edit Information</h3>
 		<% if flash[:lend_errors] %>
 			<% flash[:lend_errors].each do |error| %>
 				<p><%= error %></p>
@@ -43,13 +47,13 @@
 				</select>
 			</div>
 			<div class='text-right'>
-				<input type='submit' value='Save' />
+				<button type='submit' class='btn btn-primary pull-right addnew-btn'>Save</button>
 			</div>
 		</form>
 	</div>
 
 	<div class='col-md-6'>
-		<h2>Change Password</h2>
+		<h3>Change Password</h3>
 		<% if flash[:bor_errors] %>
 			<% flash[:bor_errors].each do |error| %>
 				<p><%= error %></p>
@@ -71,7 +75,7 @@
 				<input type='text' class="form-control" name='confirm'>
 			</div>
 			<div class='text-right'>
-				<input type='submit' value='Update Password' />
+				<button type='submit' class='btn btn-primary pull-right addnew-btn'>Update Password</button>
 			</div>
 		</form>
 	</div>

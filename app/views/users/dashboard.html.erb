@@ -1,17 +1,25 @@
+<% content_for :stylesheet do %>
+	<%= stylesheet_link_tag 'dashboards.css' %>
+<% end %> 
+
+
 <%= render "layouts/signout" %>
 
-<h1>Dashboards</h1>
-<h3>Hello <%= current_user.first_name %> </h3>
+<div class='row'>
+	<div class='col-md-12'>
+		<h2>Dashboards - Hello <%= current_user.first_name %> </h2>
+	</div>
+</div>
 
 <% if current_user.user_level == 9 %>
-	<div class='row'>
-		<div class='text-left'>
+<div class='row'>
+	<div class='col-md-12'>
+		<div>
 			<h3 class='inline'>Manage Users</h3>
-		</div>
-		<div class='text-right'>
-			<button type='button'><a href="/users/new">Add New</a></button>
+			<button type='button' class='btn btn-default pull-right addnew-btn'><a href="/users/new">Add New</a></button>
 		</div>
 	</div>
+</div>
 <% else %>
 <div class='row'>
 	<div class='text-left'>
@@ -24,12 +32,11 @@
 	<tr>
 		<td>ID</td>
 		<td>Name</td>
-		<td>email</td>
-		<td>created_at</td>
-		<td>user_level</td>
+		<td>Email</td>
+		<td>Created At</td>
+		<td>User Level</td>
 		<% if current_user.user_level == 9 %>
-
-			<td>actions</td>
+			<td>Actions</td>
 		<% end %>
 	</tr>
 	<% @users.each do |user| %>

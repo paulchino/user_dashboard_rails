@@ -1,17 +1,12 @@
+<% content_for :stylesheet do %>
+	<%= stylesheet_link_tag 'register.css' %>
+<% end %> 
+
 <%= render "layouts/signin" %>
 
 <div class='row'>
 	<div class='col-md-6'>
 		<h2>Register</h2>
-		<% if flash[:errors] %>
-			<% flash[:errors].each do |error| %>
-				<p><%= error %></p>
-			<% end %>
-		<% end %>
-		<% if flash[:notice] %>
-			<%= flash[:notice] %>
-		<% end %>
-
 		<form action='/users/' method='post'>
 			<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 			<div class='form-group'>
@@ -35,11 +30,23 @@
 				<input type='text' class="form-control" name='password_confirmation'>
 			</div>
 			<div class='text-right'>
-				<input type='submit' value='Register' />
-				<a href="/sessions/index">Already a member?</a>
+				<button type="submit" class="btn btn-default">Register</button>
 			</div>
-
 		</form>
-
+		<div class='text-right'>
+			<a href="/sessions/index">Already a member?</a>
+		</div>
+	</div>
+	<div class='col-md-6'>
+		<div class='register-notice'>
+		<% if flash[:errors] %>
+			<% flash[:errors].each do |error| %>
+				<p class='red'><%= error %></p>
+			<% end %>
+		<% end %>
+		<% if flash[:notice] %>
+			<p> <%= flash[:notice] %> </p>
+		<% end %>
+	</div>
 	</div>
 </div>
