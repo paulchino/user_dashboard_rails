@@ -1,21 +1,19 @@
-<%= render "layouts/signout" %>
+<% content_for :stylesheet do %>
+	<%= stylesheet_link_tag 'register.css', media: "all", 'data-turbolinks-track' => true  %>
+<% end %> 
+
+<% #render "layouts/signout" %>
 
 <div class='row'>
-	<h2>Add a new user</h2>
-	<button><a href='/users/dashboard'>Return to Dashboard</a></button>
+	<div class="col-xs-12 title_row">
+		<h2 class="form_title">Add a New User</h2>	
+		<a href="/users/dashboard" class="btn btn-info pull-right dashboard_btn" role="button">Return to Dashboard</a>
+	</div>
 </div>
 
 <div class='row'>
-	<div class='col-md-6'>
-		<% if flash[:errors] %>
-			<% flash[:errors].each do |error| %>
-				<p><%= error %></p>
-			<% end %>
-		<% end %>
-		<% if flash[:notice] %>
-			<%= flash[:notice] %>
-		<% end %>
-
+	<div class='col-xs-6'>
+		<h2 class="form_title">Register</h2>
 		<form action='/users/' method='post'>
 			<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 			<div class='form-group'>
@@ -38,9 +36,23 @@
 				<label for='password_confirmation'>Confirm Password</label>	
 				<input type='text' class="form-control" name='password_confirmation'>
 			</div>
-			<div class='text-right'>
-				<input type='submit' value='Register' />
+			<div class='form-group'>
+				<div class="text-right">
+					<button type="submit" class="btn btn-primary">Register</button>
+				</div>
 			</div>
 		</form>
+	</div>
+	<div class="col-xs-6">
+		<div class="error-notice">
+		<% if flash[:errors] %>
+			<% flash[:errors].each do |error| %>
+				<p class="red"><%= error %></p>
+			<% end %>
+		<% end %>
+		<% if flash[:notice] %>
+			<p class="red"><%= flash[:notice] %></p>
+		<% end %>
+		</div>
 	</div>
 </div>

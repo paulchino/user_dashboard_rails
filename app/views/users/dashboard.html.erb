@@ -1,22 +1,22 @@
 <% content_for :stylesheet do %>
-	<%= stylesheet_link_tag 'dashboards.css' %>
+	<%= stylesheet_link_tag 'dashboards.css', media: "all", 'data-turbolinks-track' => true %>
 <% end %> 
 
 
-<%= render "layouts/signout" %>
+<% #render "layouts/signout" %>
 
 <div class='row'>
 	<div class='col-md-12'>
-		<h2>Dashboards - Hello <%= current_user.first_name %> </h2>
+		<h3 class="dashboard_title"> Hello <%= current_user.first_name %> </h3>
 	</div>
 </div>
 
 <% if current_user.user_level == 9 %>
-<div class='row'>
+<div class='row underline'>
 	<div class='col-md-12'>
 		<div>
 			<h3 class='inline'>Manage Users</h3>
-			<button type='button' class='btn btn-default pull-right addnew-btn'><a href="/users/new">Add New</a></button>
+			<a href="/users/new" class="btn btn-success pull-right addnew-btn" role="button">Add New User</a>
 		</div>
 	</div>
 </div>
@@ -28,40 +28,36 @@
 </div>
 <% end %>
 
-<table class='table-striped table table-bordered'>
-	<tr>
-		<td>ID</td>
-		<td>Name</td>
-		<td>Email</td>
-		<td>Created At</td>
-		<td>User Level</td>
-		<% if current_user.user_level == 9 %>
-			<td>Actions</td>
-		<% end %>
-	</tr>
-	<% @users.each do |user| %>
-	<tr>
-		<td> <%= user.id %></td>
-		<td> <a href="/wall/<%= user.id %>"> <%= user.first_name %> <%= user.last_name %> </a> </td>
-		<td> <%= user.email %> </td>
-		<td> <%= user.created_at %> </td>
-		<td> <% if user.user_level == 9 %> 
-				admin
-			 <% else %>
-			 	normal
-			 <% end %>
-		</td>
-		<% if current_user.user_level == 9 %>
-			<td><a href="/users/<%=user.id%>/edit">edit</a> | <a href="/users/<%=user.id %>/" data-method='delete'>remove</a> </td>
-		<% end %>
-	</tr>
-	<% end %>
-<!-- 	<tr>
-		<td>2</td>
-		<td>Bob Smit</td>
-		<td>b@gmail.com</td>
-		<td>Dec. 23, 2012</td>
-		<td>normal</td>
-		<td><a href="">edit</a> | <a href="">remove</a> </td>
-	</tr> -->
-</table>
+<div class="row">
+	<div class="table_div">
+		<table class='table-striped table table-bordered'>
+			<tr>
+				<th>User ID</th>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Sign Up Date</th>
+				<th>User Level</th>
+				<% if current_user.user_level == 9 %>
+					<th>Actions</th>
+				<% end %>
+			</tr>
+			<% @users.each do |user| %>
+			<tr>
+				<td> <%= user.id %></td>
+				<td> <a href="/wall/<%= user.id %>"> <%= user.first_name %> <%= user.last_name %> </a> </td>
+				<td> <%= user.email %> </td>
+				<td> <%= user.created_at %> </td>
+				<td> <% if user.user_level == 9 %> 
+						admin
+					 <% else %>
+					 	normal
+					 <% end %>
+				</td>
+				<% if current_user.user_level == 9 %>
+					<td><a href="/users/<%=user.id%>/edit">edit</a> | <a href="/users/<%=user.id %>/" data-method='delete'>remove</a> </td>
+				<% end %>
+			</tr>
+			<% end %>
+		</table>
+	</div>
+</div>

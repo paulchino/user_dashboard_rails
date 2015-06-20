@@ -1,22 +1,21 @@
 <% content_for :stylesheet do %>
-	<%= stylesheet_link_tag 'log-in.css' %>
+	<%= stylesheet_link_tag "log-in", media: "all", 'data-turbolinks-track' => true %>
 <% end %> 
 
-<%= render "layouts/signin" %>
+<% #render "layouts/signin" %>
 
 <div class='row'>
 	<div class='col-md-6'>
-		<h2>Log In</h2>
-
-		<form action='/sessions/create' method='post'>
+		<h2 class='login_title'>Log In</h2>
+		<form action='/sessions/create' method='post' class="form_width">
 			<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 			<div class='form-group'>
 				<label for='email'>Email</label>	
-				<input type='text' class="form-control" name='email'>
+				<input type='text' class="form-control" name='email' placeholder="example@email.com">
 			</div>
 			<div class='form-group'>
 				<label for='password'>Password</label>	
-				<input type='text' class="form-control" name='password'>
+				<input type='text' class="form-control" name='password' placeholder="enter password">
 			</div>
 			<div class='text-right'>
 				<button type='submit' class='btn btn-default'>Login</button>
@@ -26,7 +25,7 @@
 	<div class='col-md-6'>
 		<div class='login-notice'>
 			<% if flash[:error] %>
-				<p class='red'><%= flash[:error] %></p>
+				<h3 class='red'><%= flash[:error] %></h3>
 			<% end %>
 		</div>
 	</div>

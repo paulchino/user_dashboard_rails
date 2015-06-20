@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
 
-  get 'dashboards/index'
+
 
   root :to => 'users#landing'
 
   get 'users/dashboard'
   get 'users/:id/edit_profile' => 'users#edit_profile'
   get 'users/:id/edit_own' => 'users#edit_own'
-
+  get 'dashboards/index'
   # patch 'users/:id/admin_password' => 'users#admin_password'
 
   resources :users 
@@ -19,13 +19,9 @@ Rails.application.routes.draw do
   post 'messages' => 'messages#create'
   post 'comments' => 'comments#create'
 
-
   get 'sessions/index'
   get 'sessions/destroy'
   post 'sessions/create'
-
-
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

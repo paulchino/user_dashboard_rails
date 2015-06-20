@@ -1,8 +1,48 @@
-.register-notice {
+.col-md-6 {
+/*	border: 1px solid red;*/
+}
+
+.form_title {
+	margin-left: 30px;
+	display: inline-block;
+/*	height: 63px;*/
+}
+
+.form-group {
+	width: 400px;
+	margin-left: 30px;
+}
+
+.already_link {
+	display: block;
+	margin-top: 15px;
+}
+
+.error-notice {
 	margin-top: 60px;
 }
 
 .red {
 	color: red;
 }
+
+.title_row {
+	height: 63px;
+	line-height: 63px;
+	border-bottom: solid 1px gray;
+}
+
+.dashboard_btn {
+	margin-right: 20px;
+/*	line-height: 63px;*/
+/*	vertical-align: middle;*/
+	margin-top: 15px;
+}
+
+
+
+.col-xs-12 {
+	/*border: solid 1px red;*/
+}
+
 

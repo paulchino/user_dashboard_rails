@@ -10,3 +10,8 @@ Rails.application.config.assets.precompile += %w( wall.css )
 Rails.application.config.assets.precompile += %w( register.css )
 Rails.application.config.assets.precompile += %w( log-in.css )
 Rails.application.config.assets.precompile += %w( dashboards.css )
+
+
+
+# New stuff
+Rails.application.config.assets.precompile += %w( landing.css )
