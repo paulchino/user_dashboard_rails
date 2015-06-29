@@ -1,6 +1,16 @@
 class UsersController < ApplicationController
 
   def index
+    #if already signed in send to dashboard
+    if signed_in? && !is_admin?
+      redirect_to '/users/dashboard'
+    end
+  end
+
+  def landing
+    if signed_in?
+      redirect_to '/users/dashboard'
+    end
   end
 
   def dashboard
@@ -14,36 +24,43 @@ class UsersController < ApplicationController
     if !signed_in? || !is_admin?
       deny_access
     end
-
-
   end
 
   def create
-    #this handles both the register and add a new user
+    collection = User.count
+    #only allow first user to be admin
+    if collection == 0 
+      params[:user_level] = 9
+    else
+      params[:user_level] = 1
+    end
 
-  	puts 'controller!!!'
   	@user = User.new ( user_params )
-
     if @user.save
     	flash[:notice] = 'New user created. Please Log In!'
-      if !signed_in?
-        sign_in @user
-      end
-
+      #shouldn't this be set when you sign on, Not when you create an account?
+      #if !signed_in?
+        #sets user info
+       # sign_in @user
+      #end
     else
-    	flash[:errors] = @user.errors.full_messages
+    	 flash[:errors] = @user.errors.full_messages
     end
 
-    if !signed_in?
-      redirect_to '/users/'
-      return
-    elsif signed_in? && is_admin?
-      redirect_to '/users/new/'
-      return
-    else
-      deny_access
-      return
-    end
+    #send back to page telling them success or rail
+    redirect_to '/users'
+
+    #is log in failed send them to users
+    # if !signed_in?
+    #   redirect_to '/users/'
+    #   return
+    # elsif signed_in? && is_admin?
+    #   redirect_to '/users/new/'
+    #   return
+    # else
+    #   deny_access
+    #   return
+    # end
   end
 
   def edit
@@ -59,7 +76,6 @@ class UsersController < ApplicationController
       deny_access
     end
 
- 
     puts 'helloooooo'
     puts session[:user_id]
 
@@ -67,11 +83,15 @@ class UsersController < ApplicationController
   end
 
   def edit_own
-   # @user = current_user
-   #  if !current_user?( @user )
-   #    deny_access
-   #  end
-    @user = User.find( params[:id] )
+    if !signed_in?
+      deny_access
+    end
+    #only own user can access own page
+    if current_user.id.to_s == params[:id].to_s
+      @user = User.find( params[:id] )
+    else
+      redirect_to "/users/dashboard"
+    end
   end
 
   def update

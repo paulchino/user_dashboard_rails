@@ -2,13 +2,10 @@
 	<%= stylesheet_link_tag 'dashboards.css' %>
 <% end %> 
 
-
-<%= render "layouts/signout" %>
-
 <div class='row'>
 	<div class='col-md-12'>
 		<h3 class='inline'>Edit user #<%= @user.id %> - <%= @user.first_name %> </h3>
-		<button type='button' class='btn btn-default pull-right addnew-btn'><a href='/users/dashboard'>Return to Dashboard</a></button>
+		<%= button_to "Return to Dashboard", "/users/dashboard", :class => "btn btn-default pull-right addnew-btn", :method => :get  %>
 	</div>
 </div>
 <div class='row'>

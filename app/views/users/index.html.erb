@@ -1,11 +1,23 @@
+<!-- Register -->
+
+<!-- Combine this with new.html.erb -->
+
 <% content_for :stylesheet do %>
-	<%= stylesheet_link_tag 'register.css' %>
+	<%= stylesheet_link_tag 'register.css', media: "all", 'data-turbolinks-track' => true  %>
 <% end %> 
 
-<% #render "layouts/signin" %>
+<!-- if signed in and admin -->
+<% if signed_in? && is_admin? %>
+<div class='row'>
+	<div class="col-xs-12 title_row">
+		<h2 class="form_title">Add a New User</h2>	
+		<a href="/users/dashboard" class="btn btn-info pull-right dashboard_btn" role="button">Return to Dashboard</a>
+	</div>
+</div>
+<% end %>
 
 <div class='row'>
-	<div class='col-sx-6'>
+	<div class='col-sx-6 inline'>
 		<h2 class="form_title">Register</h2>
 		<form action='/users/' method='post'>
 			<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
@@ -32,12 +44,14 @@
 			<div class="form-group">
 				<div class='text-right'>
 					<button type="submit" class="btn btn-default">Register</button>
+					<% if !signed_in? %>
 					<a href="/sessions/index" class="already_link">Already a member?</a>
+					<% end %>
 				</div>
 			</div>
 		</form>
 	</div>
-	<div class='col-sx-6'>
+	<div class='col-sx-6 inline errors'>
 		<div class='error-notice'>
 		<% if flash[:errors] %>
 			<% flash[:errors].each do |error| %>
@@ -47,6 +61,6 @@
 		<% if flash[:notice] %>
 			<p> <%= flash[:notice] %> </p>
 		<% end %>
-	</div>
+		</div>
 	</div>
 </div>

@@ -18,6 +18,11 @@
 	margin-top: 15px;
 }
 
+.errors {
+	vertical-align: top;
+	margin-left: 60px;
+}
+
 .error-notice {
 	margin-top: 60px;
 }
@@ -39,10 +44,5 @@
 	margin-top: 15px;
 }
 
-
-
-.col-xs-12 {
-	/*border: solid 1px red;*/
-}
 
 

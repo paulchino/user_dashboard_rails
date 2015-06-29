@@ -8,11 +8,8 @@ class CommentsController < ApplicationController
 
 	end
 
-
 	private
 	def comment_params
 		params.permit(:comment, :user_id, :message_id, :authenticity_token, :current_wall)
 	end
-
-
 end

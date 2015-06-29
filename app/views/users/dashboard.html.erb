@@ -2,13 +2,8 @@
 	<%= stylesheet_link_tag 'dashboards.css', media: "all", 'data-turbolinks-track' => true %>
 <% end %> 
 
-
-<% #render "layouts/signout" %>
-
 <div class='row'>
-	<div class='col-md-12'>
-		<h3 class="dashboard_title"> Hello <%= current_user.first_name %> </h3>
-	</div>
+	<h3 class="dashboard_title name_title"> Hello <%= current_user.first_name %> </h3>
 </div>
 
 <% if current_user.user_level == 9 %>
@@ -22,9 +17,7 @@
 </div>
 <% else %>
 <div class='row'>
-	<div class='text-left'>
-		<h3 class='inline'>All Users</h3>
-	</div>
+	<h3 class='inline name_title'>All Users</h3>
 </div>
 <% end %>
 
@@ -54,7 +47,13 @@
 					 <% end %>
 				</td>
 				<% if current_user.user_level == 9 %>
-					<td><a href="/users/<%=user.id%>/edit">edit</a> | <a href="/users/<%=user.id %>/" data-method='delete'>remove</a> </td>
+					<td><a href="/users/<%=user.id%>/edit">edit</a>
+
+					<!-- adamin cannot remove their own account -->
+					<% if current_user.id != user.id %>
+					 | <a href="/users/<%=user.id %>/" data-method='delete'>remove</a>
+					<% end %>
+					</td>
 				<% end %>
 			</tr>
 			<% end %>
