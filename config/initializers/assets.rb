@@ -15,3 +15,4 @@ Rails.application.config.assets.precompile += %w( dashboards.css )
 
 # New stuff
 Rails.application.config.assets.precompile += %w( landing.css )
+Rails.application.config.assets.precompile += %w( edit.css )
