@@ -6,7 +6,7 @@
 		<div class="right_align">
 			<% if signed_in? %>
 				<p class="navbar-text signed_in">Signed in as <%= @current_user.first_name %></p>
-				<p class="navbar-text signed_in"><a href="/users/<%= session[:user_id] %>/edit_own" class="navbar-link">Edit Profile</a></p>
+				<p class="navbar-text signed_in"><a href="/users/<%= current_user.id %>/edit" class="navbar-link">Edit Profile</a></p>
 				<%= link_to "Log Out", "/sessions/destroy", class: "navbar-text navbar-link" %>				
 				<!-- <a href="" class="logout_nav">Logout</a> -->
 			<% else %>

@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
             #this validates the form input
   validates :password,  :presence => true,
             :confirmation         => true,
-            :length               => { :within => 4..100 },
+            :length               => { :within => 8..100 },
             on: :create
 
   #before the user gets added to DB, run this function.

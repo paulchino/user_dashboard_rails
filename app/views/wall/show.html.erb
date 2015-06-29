@@ -5,7 +5,9 @@
 <% #render "layouts/signout" %>
 <div class='row underline'>
 	<div class='col-xs-12 underline'>
-		<h3 class=><%= @user[:first_name] %> <%= @user[:last_name] %> - Profile/Message Board </h3>
+		<h3 class="inline"><%= @user[:first_name] %> <%= @user[:last_name] %> - Profile/Message Board </h3>
+		<button type='button' class='btn btn-default pull-right addnew-btn'><a href='/users/dashboard'>Return to Dashboard</a></button>
+
 	</div>
 </div>
 <div class='row'>

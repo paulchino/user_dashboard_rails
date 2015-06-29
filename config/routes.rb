@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   root :to => 'users#landing'
 
   get 'users/dashboard'
-  get 'users/:id/edit_profile' => 'users#edit_profile'
-  get 'users/:id/edit_own' => 'users#edit_own'
+  # get 'users/:id/edit_profile' => 'users#edit_profile'
+  # get 'users/:id/edit_own' => 'users#edit_own'
   get 'dashboards/index'
   # patch 'users/:id/admin_password' => 'users#admin_password'
 

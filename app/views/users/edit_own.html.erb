@@ -3,13 +3,13 @@
 <% end %> 
 
 <div class='row'>
-	<div class='col-md-12'>
+	<div class='col-xs-12'>
 		<h3 class='inline'>Edit user #<%= @user.id %> - <%= @user.first_name %> </h3>
-		<%= button_to "Return to Dashboard", "/users/dashboard", :class => "btn btn-default pull-right addnew-btn", :method => :get  %>
+		<a href="/users/dashboard" class="btn btn-default pull-right addnew-btn" role="button">Return to Dashboard</a>
 	</div>
 </div>
 <div class='row'>
-	<div class='col-md-6'>
+	<div class='col-xs-6'>
 		<h3>Edit Information</h3>
 		<% if flash[:lend_errors] %>
 			<% flash[:lend_errors].each do |error| %>
@@ -41,7 +41,7 @@
 		</form>
 	</div>
 
-	<div class='col-md-6'>
+	<div class='col-xs-6'>
 		<h3>Change Password</h3>
 		<% if flash[:bor_errors] %>
 			<% flash[:bor_errors].each do |error| %>
@@ -69,7 +69,7 @@
 		</form>
 	</div>
 
-	<div class='col-md-12'>
+	<div class='col-xs-12'>
 		<form action='/users/<%=@user.id %>/' method='post'>
 			<input type='hidden' name="_method" value='patch'>
 			<input type='hidden' name="self_description" value='true'>

@@ -2,9 +2,6 @@
 	<%= stylesheet_link_tag 'dashboards.css' %>
 <% end %> 
 
-lkjlkj
-<%= render "layouts/signout" %>
-
 <div class='row'>
 	<div class='col-md-12'>
 		<h3 class='inline'>Edit user #<%= @user.id %> - <%= @user.first_name %> </h3>
@@ -15,17 +12,12 @@ lkjlkj
 <div class='row'>
 	<div class='col-md-6'>
 		<h3>Edit Information</h3>
-		<% if flash[:lend_errors] %>
-			<% flash[:lend_errors].each do |error| %>
-				<p><%= error %></p>
-			<% end %>
-		<% end %>
-		<% if flash[:lend_notice] %>
-			<%= flash[:lend_notice] %>
+		<% if flash[:general] %>
+			<h4><%= flash[:general] %></h4>
 		<% end %>
 		<form action="/users/<%=@user.id%>" method='post'>
 			<input type='hidden' name="_method" value='patch'>
-			<input type='hidden' name="admin_edit" value='true'>
+			<input type='hidden' name="form" value='gen_info'>
 			<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 			<div class='form-group'>
 				<label for='email'>Email</label>	
@@ -39,6 +31,7 @@ lkjlkj
 				<label for='last_name'>Last Name</label>	
 				<input type='text' class="form-control" name='last_name' value='<%= @user.last_name %>'>
 			</div>
+			<% if is_admin?  %>
 			<div class='form-group'>
 				<label for='user_level'>User Level:</label>	
 				<select class='form-control' name='user_level'>
@@ -46,6 +39,7 @@ lkjlkj
 					<option value="1">Normal</option>
 				</select>
 			</div>
+			<% end %> 
 			<div class='text-right'>
 				<button type='submit' class='btn btn-primary pull-right addnew-btn'>Save</button>
 			</div>
@@ -54,17 +48,12 @@ lkjlkj
 
 	<div class='col-md-6'>
 		<h3>Change Password</h3>
-		<% if flash[:bor_errors] %>
-			<% flash[:bor_errors].each do |error| %>
-				<p><%= error %></p>
-			<% end %>
-		<% end %>
 		<% if flash[:password_mess] %>
-			<%= flash[:password_mess] %>
+			<h4><%= flash[:password_mess] %></h4>
 		<% end %>
 		<form action='/users/<%=@user.id %>' method='post'>
 			<input type='hidden' name="_method" value='patch'>
-			<input type='hidden' name="admin_pass" value='true'>
+			<input type='hidden' name="form" value='pass'>
 			<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 			<div class='form-group'>
 				<label for='password'>Password - Must be at least 8 Characters</label>	
