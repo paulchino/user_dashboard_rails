@@ -2,7 +2,6 @@
 	<%= stylesheet_link_tag 'wall.css', media: "all", 'data-turbolinks-track' => true  %>
 <% end %> 
 
-<% #render "layouts/signout" %>
 <div class='row underline'>
 	<div class='col-xs-12 underline'>
 		<h3 class="inline"><%= @user[:first_name] %> <%= @user[:last_name] %> - Profile/Message Board </h3>
@@ -16,7 +15,7 @@
 			<tbody>
 				<tr>
 					<td>Registed On:</td>
-					<td><%= @user[:created_at] %></td>
+					<td><%= @user[:created_at].to_formatted_s(:long)  %></td>
 				</tr>
 				<tr>
 					<td>User ID:</td>
@@ -59,7 +58,7 @@
 <% @messages.each do |message| %>
 	<div class="post">
 		<h5><%= message[:first_name] %> </h5>
-		<p class="post_time"><%= message[:created_at] %></p>
+		<p class="post_time"><%= message[:created_at].to_formatted_s(:long)  %></p>
 		<p class="post_message"><%= message[:message] %></p>
 	</div>
 
@@ -68,7 +67,7 @@
 	<div class="comment_div">
 		<div class="comment">
 			<h5><%= comment.first_name %> </h5>
-			<p class="post_time"><%= comment.created_at %></p>
+			<p class="post_time"><%= comment.created_at.to_formatted_s(:long)  %></p>
 			<p><%= comment.comment %> </p>
 		</div>
 	</div>

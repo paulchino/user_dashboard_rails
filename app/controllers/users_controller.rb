@@ -36,14 +36,16 @@ class UsersController < ApplicationController
     end
 
   	@user = User.new ( user_params )
-    if @user.save
-    	flash[:notice] = 'New user created. Please Log In!'
+    if @user.save && is_admin?
+    	flash[:notice] = 'New user created.'
       #shouldn't this be set when you sign on, Not when you create an account?
       #if !signed_in?
         #sets user info
        # sign_in @user
       #end
-    else
+    elsif @user.save
+      flash[:notice] = 'New user created. Please log in.'
+    else     
     	 flash[:errors] = @user.errors.full_messages
     end
 
@@ -67,9 +69,6 @@ class UsersController < ApplicationController
     if !signed_in?
       deny_access
     end
-
-    #puts 'hlsdkjflkdsjflkdsjlkfsdjlkflkds'
-    #puts params[:id]
 
     # if a user tried to access another persons 
     # account and is NOT an admin redirect to dashboard  
@@ -120,14 +119,14 @@ class UsersController < ApplicationController
     @user = User.find( params[:id] )
     if params[:form] == "gen_info"
       #puts "in the general info lksdjflkdsjlfkjsdlkfjdlsk"
-      if is_admin?
-        if User.find(params[:id]).update(email: params[:email], first_name: params[:first_name], last_name: params[:last_name], user_level: params[:user_level])
+      if is_admin? && params[:id].to_i != @current_user.id.to_i
+        if User.find(params[:id]).update(email: params[:email], first_name: params[:first_name], last_name: params[:last_name], user_level: params[:user_level], description: params[:description])
           flash[:general] = "Info Updated"
         else 
           flash[:general] = "Errors updating. Make sure all fields filled"
         end
       else
-        if User.find(params[:id]).update(email: params[:email], first_name: params[:first_name], last_name: params[:last_name])
+        if User.find(params[:id]).update(email: params[:email], first_name: params[:first_name], last_name: params[:last_name], description: params[:description] )
           flash[:general] = "Info Updated"
         else
           flash[:general] = "Errors updating. Make sure all fields filled"      
@@ -192,7 +191,7 @@ class UsersController < ApplicationController
   #define strong parameters!
   private
     def user_params
-      params.permit(:first_name, :last_name, :email, :password, :user_level, :password_confirmation, :authenticity_token)
+      params.permit(:first_name, :last_name, :email, :password, :user_level, :password_confirmation, :description, :authenticity_token)
     end
 
 end

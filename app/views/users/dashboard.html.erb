@@ -3,16 +3,16 @@
 <% end %> 
 
 <div class='row'>
-	<h3 class="dashboard_title name_title"> Hello <%= current_user.first_name %> </h3>
+	<div class="col-xs-12">
+		<h3 class="dashboard_title name_title"> Hello <%= current_user.first_name %> </h3>
+	</div>
 </div>
 
 <% if current_user.user_level == 9 %>
 <div class='row underline'>
-	<div class='col-md-12'>
-		<div>
-			<h3 class='inline'>Manage Users</h3>
-			<a href="/users/new" class="btn btn-success pull-right addnew-btn" role="button">Add New User</a>
-		</div>
+	<div class="col-xs-12">
+		<h3 class='inline name_title'>Manage Users</h3>
+		<a href="/users/new" class="btn btn-success pull-right addnew-btn" role="button">Add New User</a>
 	</div>
 </div>
 <% else %>
@@ -39,7 +39,7 @@
 				<td> <%= user.id %></td>
 				<td> <a href="/wall/<%= user.id %>"> <%= user.first_name %> <%= user.last_name %> </a> </td>
 				<td> <%= user.email %> </td>
-				<td> <%= user.created_at %> </td>
+				<td> <%= user.created_at.to_formatted_s(:long) %> </td>
 				<td> <% if user.user_level == 9 %> 
 						admin
 					 <% else %>
