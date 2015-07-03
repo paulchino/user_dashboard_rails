@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
   #before the user gets added to DB, run this function.
   before_create :encrypt_password
   before_save :encrypt_password
+  #before_save :encrypt_password
 
 
 
@@ -44,6 +45,7 @@ class User < ActiveRecord::Base
 
   private
     def encrypt_password
+      return if persisted? && password == User.find(id).password
       # generate a unique salt if it's a new user
       # self.password uses the attr_accessor we defined above to allow me to grab the inputed password 
       self.salt = Digest::SHA2.hexdigest("#{Time.now.utc}--#{self.password}") if self.new_record?
